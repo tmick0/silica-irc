@@ -1,5 +1,8 @@
 #include "io_manager.h"
 
+#include "common/error.h"
+#include <errno.h>
+
 namespace silica {
 namespace io {
 
@@ -24,12 +27,16 @@ std::list<io_event> io_manager::read(timeval const& timeout) {
     std::list<io_event> result;
 
     // call select()
-    if(select(nfds, &fdset, NULL, NULL, &tv) > 0) {
+    int count = select(nfds, &fdset, NULL, NULL, &tv);
+    if(count > 0) {
         for(io_base const& sock : m_ios) {
             if(FD_ISSET(sock.m_fd, &fdset)) {
                 result.emplace_back(sock, EVENT_READABLE);
             }
         }
+    }
+    else if(count < 0){
+        make_error("select(): errno = " << errno);
     }
 
     return result;
@@ -44,7 +51,7 @@ int io_manager::make_fdset(fd_set& fdset) const
         FD_SET(sock.m_fd, &fdset);
         max = std::max(max, sock.m_fd);
     }
-    return max;
+    return max + 1;
 }
 
 
