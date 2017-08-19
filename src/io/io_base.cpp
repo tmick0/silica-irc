@@ -19,5 +19,10 @@ std::vector<uint8_t> io_base::read(size_t len) {
     return res;
 }
 
+void io_base::write(std::vector<uint8_t> const& data) {
+    ::write(m_fd, data.data(), data.size());
+}
+
+
 }
 }

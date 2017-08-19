@@ -21,6 +21,7 @@ public:
     virtual bool valid() = 0;
 
     std::vector<uint8_t> read(size_t len);
+    void write(std::vector<uint8_t> const& data);
 
     friend class io_manager;
 
