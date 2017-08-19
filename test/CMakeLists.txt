@@ -9,5 +9,5 @@ target_link_libraries(
     libgtest
 )
 
-add_subdirectory("sockets")
+add_subdirectory("io")
 add_subdirectory("common")

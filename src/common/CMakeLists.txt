@@ -4,4 +4,5 @@ add_library(
     ${lib_name}
     SHARED
     error.cpp
+    time.cpp
 )

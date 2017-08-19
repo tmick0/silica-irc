@@ -1,9 +1,9 @@
-set(lib_name "${lib_name}_sockets")
+set(lib_name "${lib_name}_io")
 
 add_library(
     ${lib_name}
     SHARED
-    socket_wrapper.cpp socket_thread.cpp
+    io_base.cpp io_events.cpp io_file.cpp io_manager.cpp
 )
 
 target_link_libraries(
@@ -15,3 +15,5 @@ add_dependencies(
     ${lib_name}
     silica_common
 )
+
+add_subdirectory("sockets")
