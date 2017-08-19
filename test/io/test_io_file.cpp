@@ -13,15 +13,13 @@ TEST(test_io_file, can_construct) {
 }
 
 TEST(test_io_file, can_read) {
-    std::ifstream s;
-    s.open("/proc/uptime");
+    io_file f("/dev/zero");
+    std::vector<uint8_t> result = f.read(10);
 
-    std::string expected;
-    s >> expected;
-
-    io_file f("/proc/uptime");
-    std::vector<uint8_t> result = f.read(expected.size());
-    std::string result_str ((char *) result.data(), result.size());
-
-    ASSERT_EQ(result_str, expected);
+    ASSERT_EQ(result.size(), 10u);
+    bool all_elements_zero = true;
+    for(uint8_t const& b : result){
+        all_elements_zero &= (b == 0);
+    }
+    ASSERT_TRUE(all_elements_zero);
 }
