@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <cstring>
 #include <vector>
+#include <string>
 
 namespace silica {
 namespace io {
@@ -20,9 +21,11 @@ public:
     virtual ~io_base();
     virtual bool valid() = 0;
 
+    virtual std::vector<uint8_t> read(size_t len) const;
+    virtual void write(std::vector<uint8_t> const& data) const;
+
     std::vector<uint8_t> read() const;
-    std::vector<uint8_t> read(size_t len) const;
-    void write(std::vector<uint8_t> const& data) const;
+    void write(std::string const& data) const;
 
     friend class io_manager;
 

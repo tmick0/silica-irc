@@ -27,6 +27,12 @@ public:
     virtual ~io_socket();
     virtual bool valid() override;
 
+    using io_base::read;
+    using io_base::write;
+
+    virtual std::vector<uint8_t> read(size_t len) const override;
+    virtual void write(std::vector<uint8_t> const& data) const override;
+
 protected:
 
     virtual size_t avail() const override;

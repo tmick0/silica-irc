@@ -27,6 +27,11 @@ void io_base::write(std::vector<uint8_t> const& data) const {
     ::write(m_fd, data.data(), data.size());
 }
 
+void io_base::write(std::string const& data) const {
+    std::vector<uint8_t> v (data.begin(), data.end());
+    write(v);
+}
+
 
 }
 }
