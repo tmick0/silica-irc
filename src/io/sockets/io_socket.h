@@ -25,6 +25,10 @@ public:
     virtual ~io_socket();
     virtual bool valid() override;
 
+protected:
+
+    virtual size_t avail() const override;
+
 private:
 
     bool m_connected;

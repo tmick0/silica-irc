@@ -1,5 +1,7 @@
 #include "io_socket.h"
 
+#include <sys/ioctl.h>
+
 namespace silica {
 namespace io {
 namespace sockets {
@@ -21,6 +23,14 @@ io_socket::~io_socket()
 
 bool io_socket::valid() {
     return m_connected;
+}
+
+size_t io_socket::avail() const {
+    size_t avail;
+    if(ioctl(m_fd, FIONREAD, &avail) == -1){
+        make_error("ioctl(): errno = " << errno);
+    }
+    return avail;
 }
 
 

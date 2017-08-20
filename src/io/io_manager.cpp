@@ -10,11 +10,20 @@ void io_manager::add_io(const io_base& io) {
     m_ios.push_back(std::cref(io));
 }
 
-std::list<io_event> io_manager::read(int timeout) {
+std::list<io_result> io_manager::read(int timeout) {
     return read(std::chrono::milliseconds{timeout});
 }
 
-std::list<io_event> io_manager::read(timeval const& timeout) {
+std::list<io_result> io_manager::read(timeval const& timeout) {
+    std::list<io_result> result;
+    std::list<io_event> ready = get_readable(timeout);
+    for(io_event const& e : ready) {
+        result.emplace_back(e.io, e.io.read());
+    }
+    return result;
+}
+
+std::list<io_event> io_manager::get_readable(timeval const& timeout) {
 
     // copy timeval because select may mutate it
     timeval tv (timeout);

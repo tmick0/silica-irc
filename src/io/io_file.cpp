@@ -2,6 +2,7 @@
 #include "common/error.h"
 
 #include <fcntl.h>
+#include <unistd.h>
 
 namespace silica {
 namespace io {
@@ -32,6 +33,22 @@ io_file::io_file(std::string const& filename, std::string const& flags) {
 bool io_file::valid() {
     return true;
 }
+
+size_t io_file::avail() const {
+    ssize_t orig;
+    ssize_t result;
+    if((orig = lseek(m_fd, 0, SEEK_CUR)) == -1){
+        make_error("lseek(): errno = " << errno);
+    }
+    if((result = lseek(m_fd, 0, SEEK_END)) == -1){
+        make_error("lseek(): errno = " << errno);
+    }
+    if(lseek(m_fd, orig, SEEK_SET) == -1){
+        make_error("lseek(): errno = " << errno);
+    }
+    return result - orig;
+}
+
 
 }
 }

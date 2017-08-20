@@ -13,13 +13,17 @@ io_base::~io_base() {
     }
 }
 
-std::vector<uint8_t> io_base::read(size_t len) {
+std::vector<uint8_t> io_base::read() const {
+    return read(avail());
+}
+
+std::vector<uint8_t> io_base::read(size_t len) const {
     std::vector<uint8_t> res (len);
-    ::read(m_fd, res.data(), len);
+    res.resize(::read(m_fd, res.data(), len));
     return res;
 }
 
-void io_base::write(std::vector<uint8_t> const& data) {
+void io_base::write(std::vector<uint8_t> const& data) const {
     ::write(m_fd, data.data(), data.size());
 }
 
