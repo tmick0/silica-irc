@@ -12,3 +12,4 @@ target_link_libraries(
 
 add_subdirectory("io")
 add_subdirectory("common")
+add_subdirectory("protocol")
