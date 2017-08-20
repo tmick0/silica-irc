@@ -6,7 +6,20 @@
 
 #include <iostream>
 
-#define make_error(data) do { silica::error e; e << data << silica::error::flush; throw e; } while(0);
+#define make_error(data)                                    \
+    do {                                                    \
+        silica::error e;                                    \
+        e << "[" << __FILE__ + strlen(__SOURCE_ROOT__) + 1; \
+        e << ":" << __LINE__ << "] ";                       \
+        e << data << silica::error::flush;                  \
+        throw e;                                            \
+    } while(0);
+
+#define make_error_errno(data, e)                             \
+    do {                                                      \
+        char _strerror_buf[64];                               \
+        make_error(data << strerror_r(e, _strerror_buf, 64)); \
+    } while(0);
 
 namespace silica {
 

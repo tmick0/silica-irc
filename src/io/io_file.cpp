@@ -38,13 +38,13 @@ size_t io_file::avail() const {
     ssize_t orig;
     ssize_t result;
     if((orig = lseek(m_fd, 0, SEEK_CUR)) == -1){
-        make_error("lseek(): errno = " << errno);
+        make_error_errno("lseek(): ", errno);
     }
     if((result = lseek(m_fd, 0, SEEK_END)) == -1){
-        make_error("lseek(): errno = " << errno);
+        make_error_errno("lseek(): ", errno);
     }
     if(lseek(m_fd, orig, SEEK_SET) == -1){
-        make_error("lseek(): errno = " << errno);
+        make_error_errno("lseek(): ", errno);
     }
     return result - orig;
 }

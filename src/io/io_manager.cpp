@@ -45,7 +45,7 @@ std::list<io_event> io_manager::get_readable(timeval const& timeout) {
         }
     }
     else if(count < 0){
-        make_error("select(): errno = " << errno);
+        make_error_errno("select(): ", errno);
     }
 
     return result;
