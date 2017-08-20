@@ -3,6 +3,7 @@
 
 #include <exception>
 #include <sstream>
+#include <cstring>
 
 #include <iostream>
 
