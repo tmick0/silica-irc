@@ -13,6 +13,6 @@ TEST(test_error, make_error_what) {
         make_error("hello" << " world " << 1234 << "!");
     }
     catch(error const& err) {
-        EXPECT_EQ(strcmp("hello world 1234!", err.what()), 0);
+        EXPECT_NE(strstr(err.what(), "hello world 1234!"), nullptr);
     }
 }

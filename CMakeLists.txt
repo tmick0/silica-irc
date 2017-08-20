@@ -6,7 +6,6 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-Wall -Wpedantic -Werror)
-add_definitions(-D__SOURCE_ROOT__="${PROJECT_SOURCE_DIR}/src")
 
 set(CMAKE_ORIGINAL_BINARY_DIR ${CMAKE_BINARY_DIR})
 

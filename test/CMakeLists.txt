@@ -1,3 +1,4 @@
+add_definitions(-D__SOURCE_ROOT__="${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_library(
     gtest_main
