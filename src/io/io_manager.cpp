@@ -52,6 +52,35 @@ std::list<io_event> io_manager::get_readable(timeval const& timeout) {
 
 }
 
+std::list<io_event> io_manager::get_writeable(timeval const& timeout) {
+
+    // copy timeval because select may mutate it
+    timeval tv (timeout);
+
+    // create fdset
+    fd_set fdset;
+    const int nfds = make_fdset(fdset);
+
+    // create return list
+    std::list<io_event> result;
+
+    // call select()
+    int count = select(nfds, NULL, &fdset, NULL, &tv);
+    if(count > 0) {
+        for(io_base const& sock : m_ios) {
+            if(FD_ISSET(sock.m_fd, &fdset)) {
+                result.emplace_back(sock, EVENT_WRITEABLE);
+            }
+        }
+    }
+    else if(count < 0){
+        make_error_errno("select(): ", errno);
+    }
+
+    return result;
+
+}
+
 int io_manager::make_fdset(fd_set& fdset) const
 {
     int max = -1;

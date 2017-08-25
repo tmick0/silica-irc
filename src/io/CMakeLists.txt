@@ -3,7 +3,7 @@ set(lib_name "${lib_name}_io")
 add_library(
     ${lib_name}
     SHARED
-    io_base.cpp io_events.cpp io_file.cpp io_manager.cpp io_results.cpp
+    io_base.cpp io_events.cpp io_file.cpp io_manager.cpp io_results.cpp io_thread.cpp
 )
 
 target_link_libraries(

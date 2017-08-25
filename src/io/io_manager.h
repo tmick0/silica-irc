@@ -16,6 +16,8 @@
 namespace silica {
 namespace io {
 
+class io_thread;
+
 class io_manager {
 public:
 
@@ -34,8 +36,11 @@ private:
 
     int make_fdset(fd_set& fdset) const;
     std::list<io_event> get_readable(timeval const& timeout);
+    std::list<io_event> get_writeable(timeval const& timeout);
 
     std::list<std::reference_wrapper<const io_base>> m_ios;
+
+    friend class io_thread;
 
 };
 
