@@ -90,6 +90,72 @@ typedef command_impl<CMD_LIST,   0, 1, false> command_list;
 typedef command_impl<CMD_INVITE, 2, 0, false> command_invite;
 typedef command_impl<CMD_KICK,   2, 1, true>  command_kick;
 
+/* server queries and commands */
+
+constexpr char CMD_VERSION[] = "VERSION";
+constexpr char CMD_STATS[]   = "STATS";
+constexpr char CMD_LINKS[]   = "LINKS";
+constexpr char CMD_TIME[]    = "TIME";
+constexpr char CMD_CONNECT[] = "CONNECT";
+constexpr char CMD_TRACE[]   = "TRACE";
+constexpr char CMD_ADMIN[]   = "ADMIN";
+constexpr char CMD_INFO[]    = "INFO";
+
+typedef command_impl<CMD_VERSION, 0, 1, false> command_version;
+typedef command_impl<CMD_STATS,   0, 2, false> command_stats;
+typedef command_impl<CMD_LINKS,   0, 2, false> command_links;
+typedef command_impl<CMD_TIME,    0, 1, false> command_time;
+typedef command_impl<CMD_CONNECT, 1, 2, false> command_connect;
+typedef command_impl<CMD_TRACE,   0, 1, false> command_trace;
+typedef command_impl<CMD_ADMIN,   0, 1, false> command_admin;
+typedef command_impl<CMD_INFO,    0, 1, false> command_info;
+
+/* messages */
+
+constexpr char CMD_PRIVMSG[] = "PRIVMSG";
+constexpr char CMD_NOTICE[]  = "NOTICE";
+
+typedef command_impl<CMD_PRIVMSG, 2, 0, true> command_privmsg;
+typedef command_impl<CMD_NOTICE,  2, 0, true> command_notice;
+
+/* user queries */
+
+constexpr char CMD_WHO[]    = "WHO";
+constexpr char CMD_WHOIS[]  = "WHOIS";
+constexpr char CMD_WHOWAS[] = "WHOWAS";
+
+typedef command_impl<CMD_WHO,    0, 2, false> command_who;
+typedef command_impl<CMD_WHOIS,  1, 1, false> command_whois;
+typedef command_impl<CMD_WHOWAS, 1, 2, false> command_whowas;
+
+/* misc messages */
+
+constexpr char CMD_KILL[]     = "KILL";
+constexpr char CMD_PING[]     = "PING";
+constexpr char CMD_PONG[]     = "PONG";
+constexpr char CMD_ERROR[]    = "ERROR";
+constexpr char CMD_AWAY[]     = "AWAY";
+constexpr char CMD_REHASH[]   = "REHASH";
+constexpr char CMD_RESTART[]  = "RESTART";
+constexpr char CMD_SUMMON[]   = "SUMMON";
+constexpr char CMD_USERS[]    = "USERS";
+constexpr char CMD_WALLOPS[]  = "WALLOPS";
+constexpr char CMD_USERHOST[] = "USERHOST";
+constexpr char CMD_ISON[]     = "ISON";
+
+typedef command_impl<CMD_KILL,     2, 0, true>  command_kill;
+typedef command_impl<CMD_PING,     1, 1, false> command_ping;
+typedef command_impl<CMD_PONG,     1, 1, false> command_pong;
+typedef command_impl<CMD_ERROR,    1, 0, true>  command_error;
+typedef command_impl<CMD_AWAY,     0, 1, true>  command_away;
+typedef command_impl<CMD_REHASH,   0, 0, false> command_rehash;
+typedef command_impl<CMD_RESTART,  0, 0, false> command_restart;
+typedef command_impl<CMD_SUMMON,   1, 1, false> command_summon;
+typedef command_impl<CMD_USERS,    0, 1, false> command_users;
+typedef command_impl<CMD_WALLOPS,  1, 0, true>  command_wallops;
+typedef command_impl<CMD_USERHOST, 1, 0, true>  command_userhost;
+typedef command_impl<CMD_ISON,     1, 0, true>  command_ison;
+
 }
 }
 
