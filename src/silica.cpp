@@ -2,7 +2,4 @@
 
 #include <iostream>
 
-namespace silica {
-
-
-}
+namespace silica {}

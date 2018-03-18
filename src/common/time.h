@@ -12,7 +12,6 @@ inline timeval duration_to_timeval(T const& d) {
     const int64_t micro_per_sec = 1e6;
     return timeval{u.count() / micro_per_sec, u.count() % micro_per_sec};
 }
-
 }
 
 #endif

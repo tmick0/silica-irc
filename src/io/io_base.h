@@ -3,8 +3,8 @@
 
 #include <cstdint>
 #include <cstring>
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace silica {
 namespace io {
@@ -14,7 +14,6 @@ class io_manager;
 
 class io_base {
 public:
-
     io_base(io_base const& o) = delete;
     io_base(io_base&& o) = delete;
 
@@ -30,14 +29,11 @@ public:
     friend class io_manager;
 
 protected:
-
     virtual size_t avail() const = 0;
 
     io_base() = default;
     int m_fd;
-
 };
-
 }
 }
 

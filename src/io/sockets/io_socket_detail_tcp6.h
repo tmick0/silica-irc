@@ -12,7 +12,6 @@ struct io_socket_detail_tcp6 {
     static constexpr int domain = AF_INET6;
     static constexpr int type = SOCK_STREAM;
 };
-
 }
 }
 }

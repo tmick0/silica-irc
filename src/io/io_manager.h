@@ -1,14 +1,14 @@
 #ifndef io_manager_h_
 #define io_manager_h_
 
+#include "common/time.h"
 #include "io_base.h"
 #include "io_events.h"
 #include "io_results.h"
-#include "common/time.h"
 
-#include <list>
 #include <chrono>
 #include <functional>
+#include <list>
 #include <unordered_map>
 
 #include <sys/select.h>
@@ -20,7 +20,6 @@ class io_thread;
 
 class io_manager {
 public:
-
     io_manager() = default;
     void add_io(io_base const& io);
 
@@ -29,11 +28,10 @@ public:
         return read(duration_to_timeval(timeout));
     }
 
-    std::list<io_result> read(int timeout=0);
+    std::list<io_result> read(int timeout = 0);
     std::list<io_result> read(timeval const& timeout);
 
 private:
-
     int make_fdset(fd_set& fdset) const;
     std::list<io_event> get_readable(timeval const& timeout);
     std::list<io_event> get_writeable(timeval const& timeout);
@@ -41,9 +39,7 @@ private:
     std::list<std::reference_wrapper<const io_base>> m_ios;
 
     friend class io_thread;
-
 };
-
 }
 }
 

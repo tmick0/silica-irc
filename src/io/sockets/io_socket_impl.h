@@ -3,9 +3,9 @@
 
 #include "io_socket.h"
 
-#include <sys/types.h>
-#include <sys/socket.h>
 #include <netdb.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 
 namespace silica {
 namespace io {
@@ -14,24 +14,22 @@ namespace sockets {
 template <typename Detail>
 class io_socket_impl : public io_socket {
 public:
-
     io_socket_impl() {
-        if((m_fd = socket(Detail::domain, Detail::type, 0)) < 0) {
+        if ((m_fd = socket(Detail::domain, Detail::type, 0)) < 0) {
             make_error("socket()");
         }
     };
 
 protected:
-
     virtual size_t resolve(std::string const& hostname, std::string const& port, sockaddr& sock_addr) override {
         addrinfo hints;
         memset(&hints, 0, sizeof(addrinfo));
         hints.ai_family = Detail::domain;
         hints.ai_socktype = Detail::type;
 
-        addrinfo *result;
+        addrinfo* result;
         int err;
-        if((err = getaddrinfo(hostname.c_str(), port.c_str(), &hints, &result)) != 0){
+        if ((err = getaddrinfo(hostname.c_str(), port.c_str(), &hints, &result)) != 0) {
             make_error("getaddrinfo(): returned " << err);
         }
 
@@ -42,11 +40,7 @@ protected:
         freeaddrinfo(result);
         return addrlen;
     }
-
 };
-
-
-
 }
 }
 }
