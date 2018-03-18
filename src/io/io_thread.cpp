@@ -12,6 +12,11 @@ io_thread::io_thread(io_manager& manager, std::function<void(io_result const&)> 
 {
 }
 
+void io_thread::write(io_base const& io, std::string const& data) {
+    std::vector<uint8_t> v (data.begin(), data.end());
+    return write(io, v);
+}
+
 void io_thread::write(io_base const& io, std::vector<uint8_t> const& data) {
     std::unique_lock<std::mutex> lock (m_writes_lock);
 

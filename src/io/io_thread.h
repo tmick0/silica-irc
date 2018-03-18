@@ -21,6 +21,7 @@ public:
     io_thread(io_manager& manager, std::function<void(io_result const&)> callback, int timeout=1000);
 
     void write(io_base const& io, std::vector<uint8_t> const& data);
+    void write(io_base const& io, std::string const& data);
 
     void start();
     void stop();
