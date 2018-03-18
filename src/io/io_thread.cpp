@@ -18,7 +18,7 @@ void io_thread::write(io_base const& io, std::vector<uint8_t> const& data) {
     std::map<io_ref const, std::list<io_result>>::iterator it;
     std::tie(it, std::ignore) = m_pending_writes.emplace(std::make_pair(io_ref{io}, std::list<io_result>{}));
 
-    it->second.emplace_back(io, data, RESULT_WRITE);
+    it->second.emplace_back(io, data, io_result_type::RESULT_WRITE);
     m_write_cond.notify_one();
 }
 
