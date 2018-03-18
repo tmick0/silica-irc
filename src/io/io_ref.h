@@ -15,7 +15,7 @@ struct io_ref {
     {}
 
     bool operator <(io_ref const& other) const {
-        return this < &other;
+        return &io < &other.io;
     }
 
 };
