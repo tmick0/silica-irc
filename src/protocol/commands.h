@@ -2,33 +2,66 @@
 #define commands_h_
 
 #include <list>
+#include <memory>
 #include <string>
+
 #include "common/error.h"
 
 namespace silica {
 namespace protocol {
 
+class command_prototype {
+public:
+    const char* commandString() const;
+    int numRequired() const;
+    int numOptional() const;
+    bool lastArgVarLen() const;
+    bool operator==(const command_prototype& other) const;
+
+protected:
+    constexpr command_prototype(const char* commandString, int numRequired, int numOptional, bool lastArgVarLen)
+        : m_commandString(commandString),
+          m_numRequired(numRequired),
+          m_numOptional(numOptional),
+          m_lastArgVarLen(lastArgVarLen) {}
+
+    const char* m_commandString;
+    int m_numRequired;
+    int m_numOptional;
+    bool m_lastArgVarLen;
+
+    template <const char* CommandString, int NumRequired, int NumOptional, bool LastArgVarLen>
+    friend class command_impl;
+};
+
 class command_base {
 public:
-    virtual std::string serialize() = 0;
+    virtual std::string serialize() const = 0;
     virtual ~command_base() {}
+    virtual const command_prototype prototype() const = 0;
+    bool operator==(const command_base& other) const;
 
 protected:
     command_base() = default;
+
+    template <typename Container>
+    command_base(Container const& args) : m_args(args.begin(), args.end()) {}
+
+    const std::list<std::string> m_args;
 };
 
-template <char const* CommandString, int NumRequired, int NumOptional, bool LastArgVarLen>
+template <const char* CommandString, int NumRequired, int NumOptional, bool LastArgVarLen>
 class command_impl : public command_base {
 public:
     template <typename Container>
-    command_impl(Container const& args) : m_args(args.begin(), args.end()) {
+    command_impl(Container const& args) : command_base(args) {
         if (m_args.size() < NumRequired || m_args.size() > NumRequired + NumOptional) {
             make_error("command<" << CommandString << ">(): expected between " << NumRequired << " and "
                                   << NumRequired + NumOptional << " arguments but got " << m_args.size());
         }
     }
 
-    virtual std::string serialize() override {
+    std::string serialize() const override {
         std::string res(CommandString);
         for (std::list<std::string>::const_iterator it = m_args.begin(); it != m_args.end();) {
             res += " ";
@@ -44,9 +77,15 @@ public:
         return res;
     };
 
-private:
-    const std::list<std::string> m_args;
+    const command_prototype prototype() const override { return s_prototype; }
+
+    static constexpr command_prototype Prototype() { return s_prototype; }
+
+protected:
+    static constexpr command_prototype s_prototype{CommandString, NumRequired, NumOptional, LastArgVarLen};
 };
+
+std::shared_ptr<command_base> deserialize_command(const std::string& command);
 
 /* connection/registration commands */
 
