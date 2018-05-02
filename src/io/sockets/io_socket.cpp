@@ -12,7 +12,7 @@ io_socket::io_socket() : m_connected(false) {}
 
 io_socket::~io_socket() {
     if (m_connected && shutdown(m_fd, SHUT_RDWR) == -1) {
-        make_error_errno("shutdown(): ", errno);
+        print_error_errno("shutdown(): ", errno);
     }
 }
 
