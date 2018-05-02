@@ -7,19 +7,45 @@
 
 #include <iostream>
 
-#define make_error(data)                                    \
+#define construct_error(e, data)                            \
     do {                                                    \
-        silica::error e;                                    \
         e << "[" << __FILE__ + strlen(__SOURCE_ROOT__) + 1; \
         e << ":" << __LINE__ << "] ";                       \
         e << data << silica::error::flush;                  \
-        throw e;                                            \
     } while (0);
 
-#define make_error_errno(data, e)                             \
-    do {                                                      \
-        char _strerror_buf[64];                               \
-        make_error(data << strerror_r(e, _strerror_buf, 64)); \
+#define construct_error_errno(e, data, errno)                             \
+    do {                                                                  \
+        char _strerror_buf[64];                                           \
+        construct_error(e, data << strerror_r(errno, _strerror_buf, 64)); \
+    } while (0);
+
+#define make_error(data)          \
+    do {                          \
+        silica::error e;          \
+        construct_error(e, data); \
+        throw e;                  \
+    } while (0);
+
+#define make_error_errno(data, errno)          \
+    do {                                       \
+        silica::error e;                       \
+        construct_error_errno(e, data, errno); \
+        throw e;                               \
+    } while (0);
+
+#define print_error(data)         \
+    do {                          \
+        silica::error e;          \
+        construct_error(e, data); \
+        std::cerr << e;           \
+    } while (0);
+
+#define print_error_errno(data, errno)         \
+    do {                                       \
+        silica::error e;                       \
+        construct_error_errno(e, data, errno); \
+        std::cerr << e;                        \
     } while (0);
 
 namespace silica {
@@ -48,6 +74,11 @@ private:
     std::stringstream m_stream;
     std::string m_string;
 };
+
+inline std::ostream& operator<<(std::ostream& os, const error& e) {
+    os << e.what() << std::endl;
+    return os;
+}
 
 template <typename T>
 inline error& operator<<(error& e, T const& s) {

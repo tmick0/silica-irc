@@ -9,7 +9,7 @@ namespace io {
 
 io_base::~io_base() {
     if ((close(m_fd)) < 0) {
-        make_error_errno("close(): ", errno);
+        print_error_errno("close(): ", errno);
     }
 }
 
