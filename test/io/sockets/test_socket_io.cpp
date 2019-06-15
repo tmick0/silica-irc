@@ -10,11 +10,7 @@ using namespace silica;
 using namespace silica::io;
 using namespace silica::io::sockets;
 
-TEST(test_io_socket, can_construct) {
-    io_socket *s;
-    ASSERT_NO_THROW(s = new io_socket_tcp4());
-    ASSERT_NO_THROW(delete s);
-}
+TEST(test_io_socket, can_construct) { ASSERT_NO_THROW(std::make_shared<io_socket_tcp4>()); }
 
 TEST(test_io_socket, can_connect) {
     io_socket_tcp4 s;
@@ -23,7 +19,7 @@ TEST(test_io_socket, can_connect) {
 
 TEST(test_io_socket, can_do_io) {
     io_socket_tcp4 s;
-    const std::string request ("GET / HTTP/1.1\r\nHost: google.com\r\n\r\n");
+    const std::string request("GET / HTTP/1.1\r\nHost: google.com\r\n\r\n");
     s.connect("google.com", "80");
     s.write(request);
 
@@ -33,6 +29,6 @@ TEST(test_io_socket, can_do_io) {
     std::list<io_result> res = mgr.read(1000);
     ASSERT_NE(res.size(), 0u);
 
-    std::string res_str (res.front().result.begin(), res.front().result.end());
+    std::string res_str(res.front().result.begin(), res.front().result.end());
     ASSERT_EQ(res_str.find("HTTP/1.1"), 0u);
 }
