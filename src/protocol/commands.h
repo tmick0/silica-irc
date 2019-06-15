@@ -6,40 +6,20 @@
 #include <string>
 
 #include "common/error.h"
+#include "protobase.h"
+#include "prototype.h"
 
 namespace silica {
 namespace protocol {
 
-class command_prototype {
-public:
-    const char* commandString() const;
-    int numRequired() const;
-    int numOptional() const;
-    bool lastArgVarLen() const;
-    bool operator==(const command_prototype& other) const;
-
-protected:
-    constexpr command_prototype(const char* commandString, int numRequired, int numOptional, bool lastArgVarLen)
-        : m_commandString(commandString),
-          m_numRequired(numRequired),
-          m_numOptional(numOptional),
-          m_lastArgVarLen(lastArgVarLen) {}
-
-    const char* m_commandString;
-    int m_numRequired;
-    int m_numOptional;
-    bool m_lastArgVarLen;
-
-    template <const char* CommandString, int NumRequired, int NumOptional, bool LastArgVarLen>
-    friend class command_impl;
-};
-
-class command_base {
+class command_base : public protobase, public std::enable_shared_from_this<command_base> {
 public:
     virtual std::string serialize() const = 0;
     virtual ~command_base() {}
-    virtual const command_prototype prototype() const = 0;
     bool operator==(const command_base& other) const;
+
+    std::shared_ptr<command_base> command() { return shared_from_this(); };
+    bool isNumeric() const override { return false; }
 
 protected:
     command_base() = default;
@@ -74,26 +54,31 @@ public:
             res += arg;
         }
         res += "\n";
+
         return res;
     };
 
-    const command_prototype prototype() const override { return s_prototype; }
+    prototype getPrototype() const override { return s_prototype; }
 
-    static constexpr command_prototype Prototype() { return s_prototype; }
+    static prototype Prototype() { return s_prototype; }
 
 protected:
-    static constexpr command_prototype s_prototype{CommandString, NumRequired, NumOptional, LastArgVarLen};
+    static const prototype s_prototype;
 };
 
-std::shared_ptr<command_base> deserialize_command(const std::string& command);
+template <const char* CommandString, int NumRequired, int NumOptional, bool LastArgVarLen>
+const prototype command_impl<CommandString, NumRequired, NumOptional, LastArgVarLen>::s_prototype = {
+    CommandString, CommandString, NumRequired, NumOptional, LastArgVarLen};
 
 /* connection/registration commands */
 
+constexpr char CMD_PASS[] = "PASS";
 constexpr char CMD_NICK[] = "NICK";
 constexpr char CMD_USER[] = "USER";
 constexpr char CMD_OPER[] = "OPER";
 constexpr char CMD_QUIT[] = "QUIT";
 
+using command_pass = command_impl<CMD_PASS, 1, 0, false>;
 using command_nick = command_impl<CMD_NICK, 1, 0, false>;
 using command_user = command_impl<CMD_USER, 4, 0, true>;
 using command_oper = command_impl<CMD_OPER, 2, 0, false>;
@@ -184,7 +169,7 @@ using command_users = command_impl<CMD_USERS, 0, 1, false>;
 using command_wallops = command_impl<CMD_WALLOPS, 1, 0, true>;
 using command_userhost = command_impl<CMD_USERHOST, 1, 0, true>;
 using command_ison = command_impl<CMD_ISON, 1, 0, true>;
-}
-}
+}  // namespace protocol
+}  // namespace silica
 
 #endif

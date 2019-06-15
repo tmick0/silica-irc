@@ -2,26 +2,48 @@
 #define numeric_h_
 
 #include <list>
+#include <memory>
 #include <string>
+
+#include "commands.h"
+#include "prototype.h"
 
 namespace silica {
 namespace protocol {
 
-class numeric_base {
+class numeric_base : public protobase, public std::enable_shared_from_this<numeric_base> {
 public:
+    bool isNumeric() const override { return true; }
+    std::shared_ptr<numeric_base> numeric() override { return shared_from_this(); };
+    bool operator==(const numeric_base& other) const;
+
+protected:
+    numeric_base() = default;
+
+    template <typename Container>
+    numeric_base(Container const& args) : m_args(args.begin(), args.end()) {}
+
+    std::list<std::string> m_args;
 };
 
 template <int NumericCode, const char* SymbolicName, int NumArgs>
 class numeric_impl : public numeric_base {
 public:
     template <typename Container>
-    numeric_impl(Container const& args) : m_args(args.begin(), args.end()) {}
+    numeric_impl(Container const& args) : numeric_base(args) {}
 
-private:
-    std::list<std::string> m_args;
+    prototype getPrototype() const override { return Prototype(); }
+
+    static prototype Prototype() {
+        static auto s = std::to_string(NumericCode);
+        static prototype p{s.c_str(), SymbolicName, NumArgs, 0, false};
+        return p;
+    }
 };
 
 /* error replies */
+
+// FIXME: the numerics are known to have incorrect values for NumArgs
 
 constexpr int NUM_ERR_NOSUCHNICK = 401;
 constexpr char SYM_ERR_NOSUCHNICK[] = "ERR_NOSUCHNICK";
@@ -492,7 +514,7 @@ using rpl_adminloc2 = numeric_impl<NUM_RPL_ADMINLOC2, SYM_RPL_ADMINLOC2, 0>;
 constexpr int NUM_RPL_ADMINEMAIL = 259;
 constexpr char SYM_RPL_ADMINEMAIL[] = "RPL_ADMINEMAIL";
 using rpl_adminemail = numeric_impl<NUM_RPL_ADMINEMAIL, SYM_RPL_ADMINEMAIL, 0>;
-}
-}
+}  // namespace protocol
+}  // namespace silica
 
 #endif

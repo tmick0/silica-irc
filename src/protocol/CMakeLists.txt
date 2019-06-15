@@ -3,7 +3,7 @@ set(lib_name "${lib_name}_protocol")
 add_library(
     ${lib_name}
     SHARED
-    commands.cpp numeric.cpp
+    prototype.cpp protobase.cpp commands.cpp numeric.cpp deserialize.cpp
 )
 
 target_link_libraries(

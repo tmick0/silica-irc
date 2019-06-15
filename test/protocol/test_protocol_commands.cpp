@@ -3,13 +3,13 @@
 #include <fstream>
 
 #include "protocol/commands.h"
+#include "protocol/deserialize.h"
+#include "protocol/numeric.h"
 
 using namespace silica::protocol;
 
 TEST(test_protocol, can_construct) {
-    command_base *c;
-    ASSERT_NO_THROW(c = new command_mode(std::list<std::string>{"#test", "+o", "test"}));
-    ASSERT_NO_THROW(delete c);
+    ASSERT_NO_THROW(std::make_shared<command_mode>(std::list<std::string>{"#test", "+o", "test"}));
 }
 
 TEST(test_protocol, can_serialize) {
@@ -28,16 +28,24 @@ TEST(test_protocol, can_serialize_varlen) {
 
 TEST(test_protocol, can_deserialize) {
     const command_mode expected(std::list<std::string>{"#test", "+o", "test"});
-    const std::string input = "MODE #test +o test\n";
-    auto result = deserialize_command(input);
+    const std::string input = ":irc-server.example.com MODE #test +o test\n";
+    auto result = deserialize(input)->command();
     ASSERT_NE(nullptr, result);
     ASSERT_EQ(expected, *result);
 }
 
 TEST(test_protocol, can_deserialize_varlen) {
     command_topic expected(std::list<std::string>{"#test", "foo bar baz"});
-    const std::string input = "TOPIC #test :foo bar baz\n";
-    auto result = deserialize_command(input);
+    const std::string input = ":irc-server.example.com TOPIC #test :foo bar baz\n";
+    auto result = deserialize(input)->command();
     ASSERT_NE(nullptr, result);
     ASSERT_EQ(expected, *result);
+}
+
+TEST(test_protocol, can_deserialize_numeric) {
+    rpl_motdstart motdstart(std::list<std::string>{"nick", "irc-server.example.com message of the day"});
+    const std::string input = ":irc-server.example.com 375 nick :irc-server.example.com message of the day\n";
+    auto result = deserialize(input)->numeric();
+    ASSERT_NE(nullptr, result);
+    ASSERT_EQ(motdstart, *result);
 }
