@@ -9,6 +9,7 @@ namespace protocol {
 
 class factory {
 public:
+    virtual ~factory() {}
     virtual std::shared_ptr<protobase> create(const std::list<std::string>& from) const = 0;
     virtual prototype getPrototype() const = 0;
 };
@@ -212,18 +213,19 @@ std::shared_ptr<protobase> deserialize(const std::string& command) {
     while (next_space != std::string::npos) {
         size_t start = next_space + 1;
 
+        std::string next_substring;
+
         // HACK: made parsing of last variable-length argument less strict
         if (start < command.size() && command.at(start) == ':') {
-            next_space = command.find_last_not_of(" \n") + 1;
-            start += 1;
+            next_space = command.find_last_not_of(" \n");
+            next_substring = command.substr(start + 1);
         } else {
             next_space = command.find_first_of(" \n", start);
+            next_substring = command.substr(start, next_space - start);
         }
 
-        const std::string next_substring{command, start, next_space - start};
-
         if (!next_substring.empty()) {
-            args.emplace_back(command, start, next_space - start);
+            args.emplace_back(next_substring);
         }
     }
 

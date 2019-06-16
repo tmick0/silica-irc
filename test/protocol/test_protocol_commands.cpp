@@ -19,6 +19,22 @@ TEST(test_protocol, can_serialize) {
     ASSERT_EQ(expected, result);
 }
 
+TEST(test_protocol, stream_operator) {
+    {
+        command_mode c(std::list<std::string>{"#test", "+o", "test"});
+        std::stringstream ss;
+        ss << c;
+        ASSERT_EQ(c.serialize(), ss.str());
+    }
+
+    {
+        rpl_motdstart c(std::list<std::string>{"nick", "irc-server.example.com message of the day"});
+        std::stringstream ss;
+        ss << c;
+        ASSERT_EQ(c.serialize(), ss.str());
+    }
+}
+
 TEST(test_protocol, can_serialize_varlen) {
     command_topic c(std::list<std::string>{"#test", "foo bar baz"});
     const std::string expected = "TOPIC #test :foo bar baz\n";
@@ -28,7 +44,7 @@ TEST(test_protocol, can_serialize_varlen) {
 
 TEST(test_protocol, can_deserialize) {
     const command_mode expected(std::list<std::string>{"#test", "+o", "test"});
-    const std::string input = ":irc-server.example.com MODE #test +o test\n";
+    const std::string input = ":irc-server.example.com MODE #test +o test";
     auto result = deserialize(input)->command();
     ASSERT_NE(nullptr, result);
     ASSERT_EQ(expected, *result);
@@ -36,16 +52,16 @@ TEST(test_protocol, can_deserialize) {
 
 TEST(test_protocol, can_deserialize_varlen) {
     command_topic expected(std::list<std::string>{"#test", "foo bar baz"});
-    const std::string input = ":irc-server.example.com TOPIC #test :foo bar baz\n";
+    const std::string input = ":irc-server.example.com TOPIC #test :foo bar baz";
     auto result = deserialize(input)->command();
     ASSERT_NE(nullptr, result);
-    ASSERT_EQ(expected, *result);
+    ASSERT_EQ(expected, *result) << *result;
 }
 
 TEST(test_protocol, can_deserialize_numeric) {
     rpl_motdstart motdstart(std::list<std::string>{"nick", "irc-server.example.com message of the day"});
-    const std::string input = ":irc-server.example.com 375 nick :irc-server.example.com message of the day\n";
+    const std::string input = ":irc-server.example.com 375 nick :irc-server.example.com message of the day";
     auto result = deserialize(input)->numeric();
     ASSERT_NE(nullptr, result);
-    ASSERT_EQ(motdstart, *result);
+    ASSERT_EQ(motdstart, *result) << *result;
 }

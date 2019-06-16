@@ -14,11 +14,11 @@ namespace protocol {
 
 class command_base : public protobase, public std::enable_shared_from_this<command_base> {
 public:
-    virtual std::string serialize() const = 0;
+    virtual std::string serialize() const override = 0;
     virtual ~command_base() {}
     bool operator==(const command_base& other) const;
 
-    std::shared_ptr<command_base> command() { return shared_from_this(); };
+    std::shared_ptr<command_base> command() override { return shared_from_this(); };
     bool isNumeric() const override { return false; }
 
 protected:

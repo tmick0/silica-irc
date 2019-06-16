@@ -18,9 +18,11 @@ TEST(test_io_thread, lifetime) {
 
     manager.add_io(s);
 
-    io_thread thread(manager, [&thread, &res_str](io_result const& res) {
-        res_str += std::string{res.result.begin(), res.result.end()};
-    }, 500);
+    io_thread thread(manager,
+                     [&res_str](io_result const& res) {
+                         res_str += std::string{res.result.begin(), res.result.end()};
+                     },
+                     500);
 
     thread.start();
 
