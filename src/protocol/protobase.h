@@ -2,7 +2,6 @@
 #define protobase_h_
 
 #include <memory>
-#include <type_traits>
 
 #include "prototype.h"
 
