@@ -21,6 +21,8 @@ public:
     std::shared_ptr<command_base> command() override { return shared_from_this(); };
     bool isNumeric() const override { return false; }
 
+    const std::list<std::string>& getArgs() const { return m_args; }
+
 protected:
     command_base() = default;
 

@@ -194,9 +194,12 @@ std::shared_ptr<protobase> deserialize(const std::string& command) {
         make_error("Could not deserialize command because no delimiter was found: '" << command << "'");
     }
 
-    const std::string source(command.substr(last_space, next_space - last_space));
-    last_space = next_space + 1;
-    next_space = command.find(' ', last_space);
+    // TODO: make the source available in the returned message
+    if (command[last_space] == ':') {
+        const std::string source(command.substr(last_space, next_space - last_space));
+        last_space = next_space + 1;
+        next_space = command.find(' ', last_space);
+    }
 
     const std::string cmd(command.substr(last_space, next_space - last_space));
 

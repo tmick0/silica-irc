@@ -65,3 +65,18 @@ TEST(test_protocol, can_deserialize_numeric) {
     ASSERT_NE(nullptr, result);
     ASSERT_EQ(motdstart, *result) << *result;
 }
+
+TEST(test_protocol, can_deserialize_ping) {
+    const command_ping expected(std::list<std::string>{"foo"});
+    const std::string input = "PING :foo";
+    auto result = deserialize(input)->command();
+    ASSERT_NE(nullptr, result);
+    ASSERT_EQ(expected, *result);
+}
+
+TEST(test_protocol, can_serialize_ping) {
+    const command_ping ping(std::list<std::string>{"foo"});
+    const std::string expected = "PING foo\n";
+    auto result = ping.serialize();
+    ASSERT_EQ(expected, result);
+}
