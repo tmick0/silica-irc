@@ -5,9 +5,9 @@
 #include <memory>
 #include <string>
 
-#include "common/error.h"
-#include "protobase.h"
-#include "prototype.h"
+#include <silica/common/error.h>
+#include <silica/protocol/protobase.h>
+#include <silica/protocol/prototype.h>
 
 namespace silica {
 namespace protocol {

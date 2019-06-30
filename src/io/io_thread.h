@@ -8,9 +8,9 @@
 #include <mutex>
 #include <thread>
 
-#include "io_manager.h"
-#include "io_ref.h"
-#include "io_results.h"
+#include <silica/io/io_manager.h>
+#include <silica/io/io_ref.h>
+#include <silica/io/io_results.h>
 
 namespace silica {
 namespace io {

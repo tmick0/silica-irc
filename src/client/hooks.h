@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "server_context.h"
+#include <silica/client/server_context.h>
 
 namespace silica {
 namespace client {

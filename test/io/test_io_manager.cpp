@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include <cstdio>
 
-#include "io/io_manager.h"
-#include "io/io_file.h"
+#include <silica/io/io_manager.h>
+#include <silica/io/io_file.h>
 
 using namespace silica;
 using namespace silica::io;

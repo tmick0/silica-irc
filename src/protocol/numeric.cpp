@@ -1,4 +1,4 @@
-#include "numeric.h"
+#include <silica/protocol/numeric.h>
 
 namespace silica {
 namespace protocol {

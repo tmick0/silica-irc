@@ -1,7 +1,7 @@
 #ifndef io_events_h_
 #define io_events_h_
 
-#include "io_base.h"
+#include <silica/io/io_base.h>
 
 namespace silica {
 namespace io {

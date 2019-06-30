@@ -1,4 +1,4 @@
-#include "error.h"
+#include <silica/common/error.h>
 
 namespace silica {
 

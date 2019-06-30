@@ -2,9 +2,9 @@
 
 #include <fstream>
 
-#include "protocol/commands.h"
-#include "protocol/deserialize.h"
-#include "protocol/numeric.h"
+#include <silica/protocol/commands.h>
+#include <silica/protocol/deserialize.h>
+#include <silica/protocol/numeric.h>
 
 using namespace silica::protocol;
 

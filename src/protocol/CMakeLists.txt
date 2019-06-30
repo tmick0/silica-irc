@@ -1,17 +1,10 @@
 set(lib_name "${lib_name}_protocol")
 
-add_library(
-    ${lib_name}
+silica_add_library(
+    TARGET ${lib_name}
     SHARED
-    prototype.cpp protobase.cpp commands.cpp numeric.cpp deserialize.cpp
-)
-
-target_link_libraries(
-    ${lib_name}
-    silica_common
-)
-
-add_dependencies(
-    ${lib_name}
-    silica_common
+    SOURCES prototype.cpp protobase.cpp commands.cpp numeric.cpp deserialize.cpp
+    HEADERS prototype.h   protobase.h   commands.h   numeric.h   deserialize.h
+    LIBRARIES silica_common
+    DESTINATION "silica/protocol/"
 )

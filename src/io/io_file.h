@@ -1,7 +1,7 @@
 #ifndef io_file_h_
 #define io_file_h_
 
-#include "io_base.h"
+#include <silica/io/io_base.h>
 
 #include <string>
 #include <unordered_map>

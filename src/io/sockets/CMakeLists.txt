@@ -1,23 +1,10 @@
 set(lib_name "${lib_name}_sockets")
 
-add_library(
-    ${lib_name}
+silica_add_library(
+    TARGET ${lib_name}
     SHARED
-    io_socket.cpp
-    io_socket_impl.cpp
-    io_socket_detail_tcp4.cpp
-    io_socket_detail_tcp6.cpp
-    io_socket_types.cpp
-)
-
-target_link_libraries(
-    ${lib_name}
-    silica_common
-    silica_io
-)
-
-add_dependencies(
-    ${lib_name}
-    silica_common
-    silica_io
+    SOURCES io_socket.cpp io_socket_impl.cpp io_socket_detail_tcp4.cpp io_socket_detail_tcp6.cpp io_socket_types.cpp
+    HEADERS io_socket.h   io_socket_impl.h   io_socket_detail_tcp4.h   io_socket_detail_tcp6.h   io_socket_types.h
+    LIBRARIES silica_common silica_io
+    DESTINATION "silica/io/sockets/"
 )

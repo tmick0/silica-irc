@@ -1,7 +1,7 @@
-#include "io_manager.h"
+#include <silica/io/io_manager.h>
 
 #include <errno.h>
-#include "common/error.h"
+#include <silica/common/error.h>
 
 namespace silica {
 namespace io {

@@ -1,10 +1,10 @@
-#include "client.h"
-#include "hooks.h"
+#include <silica/client/client.h>
+#include <silica/client/hooks.h>
 
-#include "io/sockets/io_socket_types.h"
-#include "protocol/commands.h"
-#include "protocol/deserialize.h"
-#include "protocol/numeric.h"
+#include <silica/io/sockets/io_socket_types.h>
+#include <silica/protocol/commands.h>
+#include <silica/protocol/deserialize.h>
+#include <silica/protocol/numeric.h>
 
 #include <csignal>
 

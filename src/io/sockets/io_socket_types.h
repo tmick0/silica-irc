@@ -1,9 +1,9 @@
 #ifndef io_socket_types_h_
 #define io_socket_types_h_
 
-#include "io_socket_detail_tcp4.h"
-#include "io_socket_detail_tcp6.h"
-#include "io_socket_impl.h"
+#include <silica/io/sockets/io_socket_detail_tcp4.h>
+#include <silica/io/sockets/io_socket_detail_tcp6.h>
+#include <silica/io/sockets/io_socket_impl.h>
 
 namespace silica {
 namespace io {

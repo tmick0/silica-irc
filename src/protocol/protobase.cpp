@@ -1,1 +1,1 @@
-#include "prototype.h"
+#include <silica/protocol/prototype.h>

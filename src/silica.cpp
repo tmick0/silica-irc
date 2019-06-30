@@ -1,4 +1,4 @@
-#include "silica.h"
+#include <silica/silica.h>
 
 #include <iostream>
 

@@ -11,8 +11,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "common/error.h"
-#include "io/io_base.h"
+#include <silica/common/error.h>
+#include <silica/io/io_base.h>
 
 namespace silica {
 namespace io {

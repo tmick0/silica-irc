@@ -1,11 +1,11 @@
-#include "server_context.h"
-#include "protocol/commands.h"
-#include "protocol/numeric.h"
-#include "protocol/prototype.h"
+#include <silica/client/server_context.h>
+#include <silica/protocol/commands.h>
+#include <silica/protocol/numeric.h>
+#include <silica/protocol/prototype.h>
 
 #include <chrono>
-#include "client.h"
-#include "hooks.h"
+#include <silica/client/client.h>
+#include <silica/client/hooks.h>
 
 using namespace silica::protocol;
 

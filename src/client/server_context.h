@@ -7,9 +7,9 @@
 #include <mutex>
 #include <string>
 
-#include "context_state.h"
-#include "io/io_base.h"
-#include "protocol/protobase.h"
+#include <silica/client/context_state.h>
+#include <silica/io/io_base.h>
+#include <silica/protocol/protobase.h>
 
 namespace silica {
 namespace client {

@@ -1,5 +1,5 @@
-#include "io_socket.h"
-#include "common/error.h"
+#include <silica/io/sockets/io_socket.h>
+#include <silica/common/error.h>
 
 #include <errno.h>
 #include <sys/ioctl.h>

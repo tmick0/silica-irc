@@ -5,8 +5,8 @@
 #include <memory>
 #include <string>
 
-#include "commands.h"
-#include "prototype.h"
+#include <silica/protocol/commands.h>
+#include <silica/protocol/prototype.h>
 
 namespace silica {
 namespace protocol {

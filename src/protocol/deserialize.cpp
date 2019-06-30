@@ -1,6 +1,6 @@
-#include "deserialize.h"
-#include "commands.h"
-#include "numeric.h"
+#include <silica/protocol/deserialize.h>
+#include <silica/protocol/commands.h>
+#include <silica/protocol/numeric.h>
 
 #include <map>
 

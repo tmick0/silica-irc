@@ -1,24 +1,10 @@
 set(lib_name "${lib_name}_client")
 
-add_library(
-    ${lib_name}
+silica_add_library(
+    TARGET ${lib_name}
     SHARED
-    client.cpp server_context.cpp context_state.cpp
+    SOURCES client.cpp server_context.cpp context_state.cpp
+    HEADERS client.h   server_context.h   context_state.h   hooks.h 
+    LIBRARIES silica_common silica_io silica_io_sockets silica_protocol
+    DESTINATION "silica/client/"
 )
-
-target_link_libraries(
-    ${lib_name}
-    silica_common
-    silica_io
-    silica_io_sockets
-    silica_protocol
-)
-
-add_dependencies(
-    ${lib_name}
-    silica_common
-    silica_io
-    silica_io_sockets
-    silica_protocol
-)
-

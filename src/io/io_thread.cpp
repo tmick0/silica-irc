@@ -1,6 +1,6 @@
-#include "io_thread.h"
+#include <silica/io/io_thread.h>
 
-#include "common/error.h"
+#include <silica/common/error.h>
 
 namespace silica {
 namespace io {

@@ -2,9 +2,9 @@
 
 #include <fstream>
 
-#include "io/io_manager.h"
-#include "io/sockets/io_socket.h"
-#include "io/sockets/io_socket_types.h"
+#include <silica/io/io_manager.h>
+#include <silica/io/sockets/io_socket.h>
+#include <silica/io/sockets/io_socket_types.h>
 
 using namespace silica;
 using namespace silica::io;

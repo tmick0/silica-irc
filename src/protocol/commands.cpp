@@ -1,6 +1,6 @@
-#include "commands.h"
+#include <silica/protocol/commands.h>
 
-#include "common/error.h"
+#include <silica/common/error.h>
 
 namespace silica {
 namespace protocol {

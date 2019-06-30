@@ -3,9 +3,9 @@
 
 #include <memory>
 
-#include "prototype.h"
+#include <silica/protocol/prototype.h>
 
-#include "common/error.h"
+#include <silica/common/error.h>
 
 namespace silica {
 namespace protocol {

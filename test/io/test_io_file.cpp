@@ -3,7 +3,7 @@
 #include <fstream>
 #include <memory>
 
-#include "io/io_file.h"
+#include <silica/io/io_file.h>
 
 using namespace silica::io;
 

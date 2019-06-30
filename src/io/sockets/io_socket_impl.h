@@ -1,7 +1,7 @@
 #ifndef io_socket_impl_h_
 #define io_socket_impl_h_
 
-#include "io_socket.h"
+#include <silica/io/sockets/io_socket.h>
 
 #include <netdb.h>
 #include <sys/socket.h>

@@ -1,10 +1,10 @@
 #ifndef io_manager_h_
 #define io_manager_h_
 
-#include "common/time.h"
-#include "io_base.h"
-#include "io_events.h"
-#include "io_results.h"
+#include <silica/common/time.h>
+#include <silica/io/io_base.h>
+#include <silica/io/io_events.h>
+#include <silica/io/io_results.h>
 
 #include <chrono>
 #include <functional>

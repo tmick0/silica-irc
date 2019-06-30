@@ -2,8 +2,8 @@
 
 #include <fstream>
 
-#include "io/io_thread.h"
-#include "io/sockets/io_socket_types.h"
+#include <silica/io/io_thread.h>
+#include <silica/io/sockets/io_socket_types.h>
 
 using namespace silica::io;
 using namespace silica::io::sockets;

@@ -2,7 +2,7 @@
 #define io_results_h_
 
 #include <vector>
-#include "io_base.h"
+#include <silica/io/io_base.h>
 
 namespace silica {
 namespace io {

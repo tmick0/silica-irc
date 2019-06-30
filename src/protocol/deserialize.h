@@ -1,7 +1,7 @@
 #ifndef deserialize_h_
 #define deserialize_h_
 
-#include "protobase.h"
+#include <silica/protocol/protobase.h>
 
 namespace silica {
 namespace protocol {

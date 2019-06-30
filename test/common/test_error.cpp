@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "common/error.h"
+#include <silica/common/error.h>
 
 using namespace silica;
 
