@@ -21,7 +21,7 @@ private:
     static int decode_flags(std::string const& flags);
     static const std::unordered_map<std::string, int> flag_map;
 };
-}
-}
+}  // namespace io
+}  // namespace silica
 
 #endif

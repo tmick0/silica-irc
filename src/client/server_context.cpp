@@ -3,9 +3,9 @@
 #include <silica/protocol/numeric.h>
 #include <silica/protocol/prototype.h>
 
-#include <chrono>
 #include <silica/client/client.h>
 #include <silica/client/hooks.h>
+#include <chrono>
 
 using namespace silica::protocol;
 

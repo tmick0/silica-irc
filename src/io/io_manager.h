@@ -40,7 +40,7 @@ private:
 
     friend class io_thread;
 };
-}
-}
+}  // namespace io
+}  // namespace silica
 
 #endif

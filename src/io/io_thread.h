@@ -44,7 +44,7 @@ private:
     std::shared_ptr<std::thread> m_io_thread;
     std::shared_ptr<std::thread> m_cb_thread;
 };
-}
-}
+}  // namespace io
+}  // namespace silica
 
 #endif

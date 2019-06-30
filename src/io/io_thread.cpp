@@ -79,5 +79,5 @@ void io_thread::io_loop() {
         }
     }
 }
-}
-}
+}  // namespace io
+}  // namespace silica

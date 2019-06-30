@@ -41,8 +41,8 @@ protected:
 private:
     bool m_connected;
 };
-}
-}
-}
+}  // namespace sockets
+}  // namespace io
+}  // namespace silica
 
 #endif

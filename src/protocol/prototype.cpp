@@ -15,5 +15,5 @@ int prototype::numOptional() const { return m_numOptional; }
 
 int prototype::numRequired() const { return m_numRequired; }
 
-}
-}
+}  // namespace protocol
+}  // namespace silica

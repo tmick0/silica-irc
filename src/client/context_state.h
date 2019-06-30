@@ -6,6 +6,6 @@ namespace client {
 
 enum class context_state { INITIALIZED = 0, CONNECTING, CONNECTED, DISCONNECTED, ERROR };
 }
-}
+}  // namespace silica
 
 #endif

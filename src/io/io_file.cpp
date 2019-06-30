@@ -1,5 +1,5 @@
-#include <silica/io/io_file.h>
 #include <silica/common/error.h>
+#include <silica/io/io_file.h>
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -44,5 +44,5 @@ size_t io_file::avail() const {
     }
     return result - orig;
 }
-}
-}
+}  // namespace io
+}  // namespace silica

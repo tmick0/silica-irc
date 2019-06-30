@@ -80,5 +80,5 @@ int io_manager::make_fdset(fd_set& fdset) const {
     }
     return max + 1;
 }
-}
-}
+}  // namespace io
+}  // namespace silica

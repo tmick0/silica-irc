@@ -34,7 +34,7 @@ protected:
     io_base() = default;
     int m_fd;
 };
-}
-}
+}  // namespace io
+}  // namespace silica
 
 #endif

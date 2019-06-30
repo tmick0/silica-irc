@@ -41,8 +41,8 @@ protected:
         return addrlen;
     }
 };
-}
-}
-}
+}  // namespace sockets
+}  // namespace io
+}  // namespace silica
 
 #endif

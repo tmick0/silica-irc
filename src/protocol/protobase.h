@@ -16,7 +16,7 @@ class command_base;
 
 class protobase {
 public:
-    virtual ~protobase(){}
+    virtual ~protobase() {}
     virtual prototype getPrototype() const = 0;
     virtual bool isNumeric() const = 0;
     virtual std::shared_ptr<numeric_base> numeric() { make_error("not a numeric message"); };

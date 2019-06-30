@@ -14,7 +14,7 @@ struct io_event {
     io_base const& io;
     io_event_type type;
 };
-}
-}
+}  // namespace io
+}  // namespace silica
 
 #endif

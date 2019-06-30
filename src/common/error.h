@@ -90,6 +90,6 @@ inline error& operator<<(error& e, error::_flush_t const& f) {
     e.m_string = e.m_stream.str();
     return e;
 }
-}
+}  // namespace silica
 
 #endif

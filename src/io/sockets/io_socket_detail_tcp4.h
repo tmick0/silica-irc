@@ -12,9 +12,9 @@ struct io_socket_detail_tcp4 {
     static constexpr int domain = AF_INET;
     static constexpr int type = SOCK_STREAM;
 };
-}
-}
-}
-}
+}  // namespace detail
+}  // namespace sockets
+}  // namespace io
+}  // namespace silica
 
 #endif

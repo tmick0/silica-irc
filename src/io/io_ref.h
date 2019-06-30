@@ -13,7 +13,7 @@ struct io_ref {
 
     bool operator<(io_ref const& other) const { return &io < &other.io; }
 };
-}
-}
+}  // namespace io
+}  // namespace silica
 
 #endif

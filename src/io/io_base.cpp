@@ -1,5 +1,5 @@
-#include <silica/io/io_base.h>
 #include <silica/common/error.h>
+#include <silica/io/io_base.h>
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -23,7 +23,7 @@ std::vector<uint8_t> io_base::read(size_t len) const {
 
 void io_base::write(std::vector<uint8_t> const& data) const {
     const auto res = ::write(m_fd, data.data(), data.size());
-    (void) res;
+    (void)res;
 }
 
 void io_base::write(std::string const& data) const {

@@ -1,8 +1,8 @@
 #ifndef io_results_h_
 #define io_results_h_
 
-#include <vector>
 #include <silica/io/io_base.h>
+#include <vector>
 
 namespace silica {
 namespace io {
@@ -17,7 +17,7 @@ struct io_result {
     std::vector<uint8_t> result;
     io_result_type type;
 };
-}
-}
+}  // namespace io
+}  // namespace silica
 
 #endif

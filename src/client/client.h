@@ -11,10 +11,10 @@
 #include <string>
 #include <unordered_map>
 
+#include <silica/client/server_context.h>
 #include <silica/io/io_manager.h>
 #include <silica/io/io_thread.h>
 #include <silica/protocol/protobase.h>
-#include <silica/client/server_context.h>
 
 namespace silica {
 namespace client {

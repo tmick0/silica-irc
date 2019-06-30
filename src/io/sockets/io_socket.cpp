@@ -1,5 +1,5 @@
-#include <silica/io/sockets/io_socket.h>
 #include <silica/common/error.h>
+#include <silica/io/sockets/io_socket.h>
 
 #include <errno.h>
 #include <sys/ioctl.h>
@@ -58,6 +58,6 @@ void io_socket::write(std::vector<uint8_t> const& data) const {
         pos += sent;
     }
 }
-}
-}
-}
+}  // namespace sockets
+}  // namespace io
+}  // namespace silica

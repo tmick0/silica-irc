@@ -11,8 +11,8 @@ namespace sockets {
 
 typedef io_socket_impl<detail::io_socket_detail_tcp4> io_socket_tcp4;
 typedef io_socket_impl<detail::io_socket_detail_tcp6> io_socket_tcp6;
-}
-}
-}
+}  // namespace sockets
+}  // namespace io
+}  // namespace silica
 
 #endif
